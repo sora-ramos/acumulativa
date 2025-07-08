@@ -1,12 +1,8 @@
-import Contador from "./components/Contador";
-import TaskManager from "./components/TaskManager";
+import PostManager from "./components/PostManager";
 
 function App() {
   return (
-    <div className="container">
-      <h1>Listado tareas</h1>
-      <TaskManager />
-    </div>
+    <PostManager/>
   );
 }
 
