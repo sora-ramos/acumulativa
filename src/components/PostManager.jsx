@@ -1,27 +1,39 @@
 import { useState } from "react";
 import PostForm from "./PostForm";
+import PostItem from "./PostItem";
 
+const PostManager = () => {
+    const [lista, setLista] = useState([]); 
 
-const TaskManager = () => {
-    const [tareas, setTareas] = useState([]); 
-
-    const addTarea = (tarea) => {
-        const esta = tareas.some(t => tarea.titulo === t.titulo )
-        if(esta){
+    const addPost = (postit) => {
+        const existe = lista.some(t => postit.titulo === t.titulo )
+        if(existe){
             alert('Titulo ya existe')
             return
         }
-        setTareas([...tareas, tarea]);
+        setLista([...lista, postit]);
 
-        alert('Bien hecho!')
+        alert('Bien hecho')
     };
 
-    
+    const deletePostit = (id) => {
+        const nueva_lista = lista.filter((t) => t.id !== id);
+        setLista(nueva_lista);
+    };
 
     return (
     <>
-        <PostForm addTarea={addTarea} />
-        
+        <PostForm addPost={addPost} />
+        <div className="row">
+            {lista.map((t) => (
+            <PostItem
+                postit={t}
+                key={t.id}
+
+                deletePostit={deletePostit}
+            />
+            ))}
+        </div>
     </>
 );
 };
